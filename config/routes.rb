@@ -1,3 +1,12 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  root 'session#new'
+  get '/login' => 'session#new'
+  post '/login' => 'session#create'
+  get '/logout' => 'session#destroy'
+  resources :users
+  resources :passwords
+  resources :posts  do
+  resources :comments, only: [:create]
+  resources :likes, only: [:create, :destroy]
+  end
 end

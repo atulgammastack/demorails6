@@ -1,0 +1,4 @@
+<%= form_with  model: @post do |form| %>
+  <%=form.text_area :content, id: :post_content, class: 'form-control', placeholder: "what's on your mind?" %>
+  <%= form.submit 'Save', class: 'btn btn-primary' %>
+<% end %>

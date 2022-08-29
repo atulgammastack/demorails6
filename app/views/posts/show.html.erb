@@ -1,0 +1,5 @@
+<h3><%= @post.user.username %></h3>
+<small><%= @post.content %></small>
+  <% if @post.user == current_user %>
+    <li><%= link_to "Edit", edit_post_path(@post) %></li>
+  <% end %>

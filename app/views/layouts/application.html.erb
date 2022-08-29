@@ -1,15 +1,24 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Facebooklite</title>
+    <title>Demofacebook</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
-    <%= yield %>
+    <% if current_user %>
+      <%= render 'shared/header' %>  
+    <%end %>
+    <main class="main">
+      <% flash.each do |key, message| %>
+        <div class="alert <%= flash_class(key) %> alert-dismissible fade show text-center" role="alert">
+          <%= message %>
+        </div>
+      <% end %>
+      <%= yield %>
+    </main>
   </body>
 </html>
