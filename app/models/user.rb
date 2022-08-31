@@ -10,8 +10,8 @@ class User < ApplicationRecord
   validates :email, uniqueness: true
   validates :password, confirmation: { case_sensitive: true }
 
-  def send_password_reset
-    generate_token(:password_reset_token)
+  def send_password_reset_instructions
+    self.password_reset_token = generate_token
     self.password_reset_sent_at = Time.zone.now
     save!
     UserMailer.reset_password_instructions(self).deliver
@@ -19,9 +19,7 @@ class User < ApplicationRecord
 
   private
   
-  def generate_token(column)
-    begin
-      self[column] = SecureRandom.urlsafe_base64
-    end while User.exists?(column => self[column])
+  def generate_token
+    SecureRandom.urlsafe_base64 
   end
 end

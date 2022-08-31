@@ -2,10 +2,19 @@ class PasswordsController < ApplicationController
   def new; end
 
   def create
+    if params[:email].blank?
+      flash[:notice] = "email not present" 
+      redirect_to new_password_path
+    end
     user = User.find_by_email(params[:email])
-    user.send_password_reset if user
-    flash[:notice] = 'E-mail sent with password reset instructions.'
-    redirect_to new_password_path
+    if user.present?
+      user.send_password_reset_instructions if user
+      flash[:notice] = 'E-mail sent with password reset instructions.'
+      redirect_to new_password_path
+    else
+      flash[:alert] = "Email address not found. Please check and try again."
+      redirect_to new_password_path
+    end
   end
 
   def edit

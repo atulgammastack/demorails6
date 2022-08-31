@@ -1,7 +1,8 @@
 class LikesController < ApplicationController
-
+  before_action :find_like
+  
   def create
-    @like = current_user.likes.new(post_id: params[:post_id])
+    @like = @post.likes.new(user_id: current_user.id)
     if @like.save
       flash[:success] = "you liked a post"
       redirect_to posts_path
@@ -12,14 +13,20 @@ class LikesController < ApplicationController
   end
 
   def destroy
-    like = Like.find_by(id: params[:id], post_id: params[:post_id])
-    if like
-      like.destroy
-      flash[:notice] = "you disliked a post"
+    if @like
+      @like.destroy
+      flash[:notice] = "you disliked a post."
       redirect_to posts_path
     else
       flash[:alert] = "You cannot dislike post that you did not like before."
       redirect_to posts_path
     end
+  end
+  
+  private
+
+  def find_like
+    @post = Post.find(params[:post_id])
+    @like = @post.post_like_by_user(current_user.id)
   end
 end

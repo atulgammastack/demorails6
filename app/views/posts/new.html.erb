@@ -1,2 +1,7 @@
 <h1>New post</h1>
 <%= render "form", post: @post %>
+<% if @post.errors.full_messages.any? %>
+  <p class="errors">
+    <%= "Post could not be saved. #{@post.errors.full_messages.join('. ')}" %>
+  </p>
+<% end %>

@@ -1,13 +1,13 @@
 class PostsController < ApplicationController
-  before_action :find_post, only: [:edit,:show,:update]
-  before_action :require_login, only:[:new,:index,:show]
+  before_action :find_post, only: %i[edit show update]
+  before_action :authenticate_user, only: %i[new index show]
 
   def new
     @post = Post.new
   end
 
   def index
-    @posts = Post.all.ordered_by_most_recent
+    @posts = Post.all.recent_posts
   end
 
   def show; end
@@ -15,11 +15,10 @@ class PostsController < ApplicationController
   def create
     @post = current_user.posts.create(post_params)
     if @post.save
-      flash[:success] = "post was succesfully uploaded"
+      flash[:success] = "your post was succesfully uploaded."
       redirect_to posts_path
     else
-      flash[:alert] = @post.errors.full_messages
-      redirect_to new_post_path
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -27,9 +26,10 @@ class PostsController < ApplicationController
 
   def update
     if @post.update(post_params)
+      flash[:success] = "your post was successfully updated."
       redirect_to posts_path
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
