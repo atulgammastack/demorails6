@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :users
   resources :passwords
   resources :posts  do
-  resources :comments, only: %i(create)
-  resources :likes, only: %i(create destroy)
+    resources :comments, only: %i(create)
+    resources :likes, only: %i(create destroy)
   end
 end

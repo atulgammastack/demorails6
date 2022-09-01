@@ -27,6 +27,6 @@ class LikesController < ApplicationController
 
   def find_like
     @post = Post.find(params[:post_id])
-    @like = @post.post_like_by_user(current_user.id)
+    @like = @post.like_by_user(current_user.id)
   end
 end

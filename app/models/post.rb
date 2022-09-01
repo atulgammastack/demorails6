@@ -7,7 +7,7 @@ class Post < ApplicationRecord
 
   scope :recent, -> { order(created_at: :desc) }
 
-  def post_like_by_user(user_id)
+  def like_by_user(user_id)
     self.likes.find_by(user_id: user_id)
   end
 end
