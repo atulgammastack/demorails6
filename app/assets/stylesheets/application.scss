@@ -1,0 +1,43 @@
+@import "bootstrap/scss/bootstrap";
+body {
+  font-family: 'Tajawal', sans-serif;
+  font-size: larger;
+}
+#post {
+  min-height: 5rem;
+  max-height: 8rem;
+}
+.post-wrapper {
+  font-size: x-large;
+  font-style: normal;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;
+}
+.post-comments{
+  font-size: medium;
+}
+.comment-author {
+  text-transform: capitalize;
+}
+.post-date {
+  font-size: medium;
+}
+ul {
+  list-style-type: none;
+}
+body {
+  background: #fff;
+  position: relative;
+  font-weight: 400;
+  font-family: 'Tajawal', sans-serif;
+}
+h1 {
+  text-align: center;
+}
+.card-header {
+  padding: 0.25rem 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.card-body {
+  padding: 0.55rem 0.85rem;
+}
