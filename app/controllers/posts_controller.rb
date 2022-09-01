@@ -26,7 +26,7 @@ class PostsController < ApplicationController
 
   def update
     if @post.update(post_params)
-      flash[:success] = "Successfully updated a your post."
+      flash[:success] = "Successfully updated your post."
       redirect_to posts_path
     else
       render :edit, status: :unprocessable_entity
