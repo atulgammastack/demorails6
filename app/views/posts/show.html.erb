@@ -17,4 +17,9 @@
       <% end %>
     </div>
   </div>
+  <% if @post.user == current_user %>
+    <div class="d-flex  mx-4 mb-3 mb-lg-4">
+      <%= link_to "Edit post", edit_post_path(@post), class: "btn btn-primary btn-lg" %>
+    </div>
+  <% end %>
 </div>

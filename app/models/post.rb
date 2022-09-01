@@ -5,7 +5,7 @@ class Post < ApplicationRecord
   
   validates :content, presence: true
 
-  scope :recent_posts, -> {order(created_at: :desc)}
+  scope :recent, -> { order(created_at: :desc) }
 
   def post_like_by_user(user_id)
     self.likes.find_by(user_id: user_id)

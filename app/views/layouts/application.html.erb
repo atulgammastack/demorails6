@@ -10,14 +10,10 @@
   </head>
   <body>
     <% if current_user %>
-      <%= render 'shared/header' %>  
-    <%end %>
+      <%= render 'shared/header' %>
+    <% end %>
     <main class="main">
-      <% flash.each do |key, message| %>
-  <div class="alert <%= flash_class(key) %> alert-dismissible fade show text-center" role="alert">
-    <%= message %>
-  </div>
-<% end %>
+      <%= render 'shared/flash_messages' %>
       <%= yield %>
     </main>
   </body>

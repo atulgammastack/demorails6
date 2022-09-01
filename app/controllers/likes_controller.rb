@@ -4,10 +4,10 @@ class LikesController < ApplicationController
   def create
     @like = @post.likes.new(user_id: current_user.id)
     if @like.save
-      flash[:success] = "you liked a post"
+      flash[:success] = "You liked a post."
       redirect_to posts_path
     else
-      flash[:alert] = "you cannot like this post"
+      flash[:alert] = "You cannot like this post."
       redirect_to posts_path
     end
   end
@@ -15,7 +15,7 @@ class LikesController < ApplicationController
   def destroy
     if @like
       @like.destroy
-      flash[:notice] = "you disliked a post."
+      flash[:notice] = "You disliked a post."
       redirect_to posts_path
     else
       flash[:alert] = "You cannot dislike post that you did not like before."

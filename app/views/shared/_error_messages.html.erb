@@ -1,5 +1,5 @@
-<% @user.errors.full_messages.each do |message| %>
+<% object.errors.full_messages.each do |message| %>
   <div class=" alert-info" role="alert">
     <%= message %>
   </div>
-<%end%>
+<% end %>

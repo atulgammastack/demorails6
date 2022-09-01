@@ -1,4 +1,6 @@
 class PasswordsController < ApplicationController
+  before_action :find_user_have_token, only: %i(edit update)
+
   def new; end
 
   def create
@@ -17,12 +19,9 @@ class PasswordsController < ApplicationController
     end
   end
 
-  def edit
-    @user = User.find_by_password_reset_token!(params[:id])
-  end
+  def edit; end
 
   def update
-    @user = User.find_by_password_reset_token!(params[:id])
     if @user.password_reset_sent_at < 2.hours.ago
       flash[:notice] = 'Password reset has expired'
       redirect_to new_password_path
@@ -35,6 +34,9 @@ class PasswordsController < ApplicationController
   end
 
   private
+  def find_user_have_token
+    @user = User.find_by_password_reset_token!(params[:id])
+  end
   
   def user_params
     params.require(:user).permit(:password)

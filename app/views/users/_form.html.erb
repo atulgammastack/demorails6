@@ -7,10 +7,10 @@
             <div class="row justify-content-center">
               <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
                 <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
-                <%= form_with model: @user, local: true, html: {class: "mx-1 mx-md-4"} do |form| %>
+                <%= form_with model: @user, object: @user, local: true, html: {class: "mx-1 mx-md-4"} do |form| %>
                   <% if @user.errors.full_messages.any? %>
-                    <%= render 'shared/error_messages' %>
-                  <%end%>
+                    <%= render 'shared/error_messages', object: @user %>
+                  <% end %>
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">

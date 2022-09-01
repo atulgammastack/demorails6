@@ -24,7 +24,7 @@
                 </strong>
               </td>
               <td class="text-primary">
-                <%= "#{@user.first_name}" %>
+                <%= @user.first_name %>
               </td>
             </tr>
             <tr>
@@ -35,7 +35,7 @@
                 </strong>
               </td>
               <td class="text-primary">
-                <%= "#{@user.last_name}" %>
+                <%= @user.last_name %>
               </td>
             </tr>
             <tr>
@@ -46,7 +46,7 @@
                 </strong>
               </td>
               <td class="text-primary">
-                <%= " #{@user.username} " %>
+                <%= @user.username %>
               </td>
             </tr>
             <tr>
@@ -57,7 +57,7 @@
                 </strong>
               </td>
               <td class="text-primary">
-                <%= " #{@user.email} "%>
+                <%= @user.email %>
               </td>
             </tr>
             <tr>
@@ -68,7 +68,7 @@
                 </strong>
               </td>
               <td class="text-primary">
-                <%= "#{@user.created_at.strftime("%y/%m/%d")}"%>
+                <%= @user.created_at.strftime("%y/%m/%d")%>
               </td>
             </tr>
           </tbody>
@@ -77,7 +77,7 @@
         <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
           <% if @user == current_user %>
             <%= link_to "Edit profile ", edit_user_path(@user), class: "btn btn-primary btn-lg" %>
-          <%end%>
+          <% end %>
         </div>
       </div>
     </div>
