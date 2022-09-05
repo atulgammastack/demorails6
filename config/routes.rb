@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   get '/login' => 'session#new'
   post '/login' => 'session#create'
   get '/logout' => 'session#destroy'
-  resources :users
+  resources :users do
+    resources :friendships
+  end
   resources :passwords
   resources :posts  do
     resources :comments, only: %i(create)

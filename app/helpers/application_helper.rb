@@ -7,7 +7,22 @@ module ApplicationHelper
       button_to('Like!', post_likes_path(post_id: post.id), method: :post)
     end
   end
-  
+
+  def accept_friend_request(friendship_id)
+    button_to('Accept', user_friendship_path(id: friendship_id, user_id: current_user.id), method: :patch)
+  end
+
+  def reject_friend_request(friendship_id)
+    button_to('Decline', user_friendship_path(id: friendship_id, user_id: current_user.id), method: :delete)
+  end
+
+  def unfriend_url(user)
+    a = Friendship.where(user_id: current_user.id, friend_id: user.id, confirmed: true)
+    b = Friendship.where(user_id: user.id, friend_id: current_user.id, confirmed: true)
+    friendship = a.exists? ? a : b
+    button_to('Unfriend', user_friendship_path(id: friendship.ids, user_id: user.id), method: :delete)
+  end
+
   def flash_class(level)
     case level
     when  'success' then 'alert-success'
