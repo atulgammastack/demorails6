@@ -8,12 +8,12 @@ class FriendshipsController < ApplicationController
   def update
     @friendship = Friendship.find_by(id: params[:id])
     @friendship.update(confirmed: true)
-    redirect_to users_path
+    redirect_to request.referrer
   end
 
   def destroy
     @friendship = Friendship.find_by(id: params[:id])
     @friendship.destroy
-    redirect_to users_path
+    redirect_to request.referrer
   end
 end
