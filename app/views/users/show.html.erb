@@ -78,8 +78,57 @@
           <% if @user == current_user %>
             <%= link_to "Edit profile ", edit_user_path(@user), class: "btn btn-primary btn-lg" %>
           <% end %>
+          <% if current_user.id != @user.id %>
+          <% if current_user.friendship_for(@user).blank?  %>
+            <%= button_to 'Add friend', user_friendships_path(@user), class: 'profile-link', method: :post %>
+          <% elsif @user.friend_request_for(current_user).present? %>
+            <% if @user.friend_request_for(current_user).pending? %>
+              <span class= 'profile-link'><%= accept_friend_request(current_user.friendship_for(@user).id) %>| <%= reject_friend_request(current_user.friendship_for(@user).id) %></span>
+            <% elsif current_user.is_friend?(@user) %>
+              <span class= 'profile-link'>Friends!!!</span> <span class= 'profile-link'><%= unfriend_url(@user) %></span>
+            <% end %>
+          <% end %>
+        <% end %>
         </div>
       </div>
     </div>
   </div>
 </div>
+<% if current_user == @user || current_user.is_friend?(@user) %>
+  <div class="container-fluid">
+    <div class="container">
+      <div class="posts mt-5">
+        <% @posts.each do |post| %>
+          <div class="post-wrapper col-12 mb-2 p-0">
+            <div class="card">
+              <div class="card-header">
+                <%= link_to post.user.username, user_path(post.user) %><br>
+                <small class=" post-date float-right mt-1"><%= post.created_at.strftime("%Y/%m/%d") %></small>
+              </div>
+              <div class="card-body">
+                <a href="<%= post_path(post) %>" ><%= post.content %></a><br>
+                <%= like_or_dislike_btn(post) %>
+                <p>likes: <%= post.likes.count %>  comments: <%= post.comments.count %></p>
+                <% post.comments.each do |comment| %>
+                  <div class="post-comments">
+                    <b><%= link_to comment.user.username ,user_path(comment.user, class: 'comment-author') %>:</b>
+                    <%= comment.content %>
+                    <small class="float-right mt-1"><%= comment.created_at.strftime("%Y/%m/%d") %></small>
+                  </div>
+                <% end %>
+                <div class="mb-3">
+                  <%= form_with model: post.comments.new, url: post_comments_path(post) do |form| %>
+                    <div class="input-group input-group-sm mb-3">
+                      <%= form.text_field :content, id: :comment_content, class: 'form-control', placeholder: 'Add new Comment' %><br>
+                      <%= form.submit 'Comment', class: 'btn btn-secondary' %>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div> 
+        <% end %>    
+      </div>
+    </div>
+  </div>     
+<% end %>

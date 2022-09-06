@@ -7,7 +7,7 @@ class CommentsController < ApplicationController
     @comment = current_user.comments.new(comment_params.merge(post_id: params[:post_id]))
     if @comment.save
       flash[:success] = "Successfully created a new comment."
-      redirect_to posts_path
+      redirect_to request.referrer
     else
       render :new, status: :unprocessable_entity
     end
