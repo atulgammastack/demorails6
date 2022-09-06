@@ -6,6 +6,13 @@
     </div>
     <div class="card-body">
       <a href="<%= post_path(@post) %>" ><%= @post.content %></a><br>
+      <% if @post.post_file.attached? %>
+        <% if @post.post_file.content_type.include?("image")%>
+          <%= image_tag url_for( @post.post_file) %>
+        <% else %>
+          <%= video_tag  url_for(@post.post_file) %>
+        <% end %>
+      <% end %>
       <%= like_or_dislike_btn(@post) %>
       <p>likes: <%= @post.likes.count %>  comments: <%= @post.comments.count %></p>
       <% @post.comments.each do |comment| %>
