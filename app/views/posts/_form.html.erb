@@ -1,4 +1,5 @@
 <%= form_with  model: @post, local: true do |form| %>
   <%= form.text_area :content, id: :post_content, class: 'form-control', placeholder: "what's on your mind?" %>
+  <%= form.file_field :post_file %><br>
   <%= form.submit 'Save', class: 'btn btn-primary' %>
 <% end %>

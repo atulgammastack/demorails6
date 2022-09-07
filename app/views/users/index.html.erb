@@ -2,6 +2,11 @@
   <ul class="users-list">
     <% @users.each do |user| %>
       <li>
+        <% if user.profile_picture.attached? %>
+          <%= image_tag url_for(user.profile_picture), style: "width:100px; height:100px;", class: "img-circle img-thumbnail isTooltip" %>
+        <% else %>
+          <%= image_tag url_for("https://bootdey.com/img/Content/avatar/avatar7.png"), style: "width:100px; height:100px;", class: "img-circle img-thumbnail isTooltip" %>
+        <% end %>
         Name: <%= user.username %>
         <span class="profile-link">
           <%= link_to 'See Profile',  user_path(user), class: 'profile-link' %>
