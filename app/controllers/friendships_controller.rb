@@ -1,19 +1,28 @@
 class FriendshipsController < ApplicationController
+  before_action :find_friendship, only: %i(update destroy)
+
   def create
-    Friendship.create(user_id: current_user.id, friend_id: params[:user_id], confirmed: false)
+    current_user.friendships.create(friend_id: params[:user_id], confirmed: :false)
     flash[:notice] = 'Friend request sent.'
     redirect_to users_path
   end
 
   def update
-    @friendship = Friendship.find_by(id: params[:id])
-    @friendship.update(confirmed: true)
+    @friendship.update(confirmed: :true)
     redirect_to request.referrer
   end
 
   def destroy
-    @friendship = Friendship.find_by(id: params[:id])
     @friendship.destroy
     redirect_to request.referrer
+  end
+
+  private
+
+  def find_friendship
+    @friendship = Friendship.find_by(id: params[:id])
+    unless @friendship.present?
+      flash[:notice] = "friendship not found"
+    end
   end
 end

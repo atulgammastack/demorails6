@@ -1,0 +1,14 @@
+<% pending_requests = object.friend_request_for(current_user) %>
+<% friendship = current_user.friendship_for(object) %>
+<% if current_user.id != object.id %>
+  <% if friendship.blank?  %>
+    <%= button_to 'Add friend', user_friendships_path(object), class: 'profile-link', method: :post %>
+  <% elsif pending_requests.present? %>
+    <% if pending_requests.pending? %>
+      <span class= 'profile-link'>pending request</span>
+      <span class= 'profile-link'><%= accept_friend_request_button(friendship.id) %><%= reject_friend_request_button(friendship.id) %></span>
+    <% elsif current_user.is_friend?(object) %>
+      <span class= 'profile-link'>Friends!!!</span> <span class= 'profile-link'><%= unfriend_friend_button(object) %></span>
+    <% end %>
+  <% end %>
+<% end %>

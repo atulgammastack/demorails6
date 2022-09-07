@@ -75,20 +75,7 @@
         </table>
         </div>
         <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-          <% if @user == current_user %>
-            <%= link_to "Edit profile ", edit_user_path(@user), class: "btn btn-primary btn-lg" %>
-          <% end %>
-          <% if current_user.id != @user.id %>
-          <% if current_user.friendship_for(@user).blank?  %>
-            <%= button_to 'Add friend', user_friendships_path(@user), class: 'profile-link', method: :post %>
-          <% elsif @user.friend_request_for(current_user).present? %>
-            <% if @user.friend_request_for(current_user).pending? %>
-              <span class= 'profile-link'><%= accept_friend_request(current_user.friendship_for(@user).id) %>| <%= reject_friend_request(current_user.friendship_for(@user).id) %></span>
-            <% elsif current_user.is_friend?(@user) %>
-              <span class= 'profile-link'>Friends!!!</span> <span class= 'profile-link'><%= unfriend_url(@user) %></span>
-            <% end %>
-          <% end %>
-        <% end %>
+          <%= render 'friendship_realation', object: @user%>
         </div>
       </div>
     </div>

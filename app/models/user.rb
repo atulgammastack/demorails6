@@ -5,10 +5,7 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :friendships, ->(user) { unscope(:where).where(user: user).or(where(friend: user)) }
-  has_many :inverse_friendships, class_name: 'Friendship', foreign_key: 'friend_id'
-  has_many :sent_requests, -> { where(confirmed: false) }, class_name: 'Friendship', foreign_key: 'user_id'
-  has_many :incoming_friendships, -> { where(confirmed: false) }, class_name: 'Friendship', foreign_key: 'friend_id'
-
+ 
   validates :first_name, length: { minimum: 3 }
   validates :first_name, :email, :username, presence: true
   validates :email, uniqueness: true
@@ -37,7 +34,7 @@ class User < ApplicationRecord
   def friend_request_for(user)
     friendships.find_by(friend_id: user.id)
   end
-
+  
   private
   
   def generate_token
