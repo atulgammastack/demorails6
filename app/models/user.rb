@@ -19,9 +19,7 @@ class User < ApplicationRecord
   end
 
   def is_friend?(user)
-    if friendship_for(user).present?
       friendship_for(user).confirmed
-    end
   end
 
   def friendship_for(user)
