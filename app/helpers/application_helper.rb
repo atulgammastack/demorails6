@@ -17,8 +17,8 @@ module ApplicationHelper
   end
 
   def unfriend_friend_button(user)
-    a = current_user.friendship_for(user)
-    button_to('Unfriend', user_friendship_path(id: a.id, user_id: user.id), method: :delete, class: "btn btn-primary btn-lg")
+    friendship = current_user.friendship_for(user)
+    button_to('Unfriend', user_friendship_path(id: friendship.id, user_id: user.id), method: :delete, class: "btn btn-primary btn-lg")
   end
 
   def flash_class(level)

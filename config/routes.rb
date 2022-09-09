@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   post '/login' => 'session#create'
   get '/logout' => 'session#destroy'
   resources :users do
-    resources :friendships
+    resources :friendships, only: %i(create update destroy)
   end
   resources :passwords
   resources :posts  do
