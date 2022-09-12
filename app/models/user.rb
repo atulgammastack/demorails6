@@ -4,6 +4,7 @@ class User < ApplicationRecord
   has_many :posts
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
+  has_many :friendships, ->(user) { unscope(:where).where(user: user).or(where(friend: user)) }
   has_one_attached :profile_picture
 
   validates :first_name, length: { minimum: 3 }
@@ -18,9 +19,21 @@ class User < ApplicationRecord
     SendmailJob.set(wait: 2.minutes).perform_later(self)
   end
 
+  def is_friend?(user)
+    friendship_for(user)&.confirmed
+  end
+
+  def friendship_for(user)
+    friend_request_for(user) || user.friend_request_for(self)
+  end
+
+  def friend_request_for(user)
+    friendships.find_by(friend_id: user.id)
+  end
+
   private
-  
+
   def generate_token
-    SecureRandom.urlsafe_base64 
+    SecureRandom.urlsafe_base64
   end
 end
