@@ -20,7 +20,7 @@ class User < ApplicationRecord
   end
 
   def is_friend?(user)
-      friendship_for(user).confirmed
+    friendship_for(user)&.confirmed
   end
 
   def friendship_for(user)

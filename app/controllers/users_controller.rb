@@ -37,7 +37,7 @@ class UsersController < ApplicationController
 
   def find_user
     @user = User.find_by(id: params[:id])
-    @posts = @user.posts.recent
+    @posts = @user.posts.includes(:comments, :likes).recent
     unless @user.present?
       flash[:notice] = "User not found."
       redirect_to users_path
