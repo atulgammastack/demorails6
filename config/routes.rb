@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
-  root 'session#new'
-  get '/login' => 'session#new'
-  post '/login' => 'session#create'
-  get '/logout' => 'session#destroy'
-  resources :users
+  devise_for :users
+  devise_scope :user do
+    root "devise/sessions#new"
+    get "signup", to: "devise/registrations#new"
+    get "login", to: "devise/sessions#new"
+    post "login", to: "devise/session#create"
+    get "logout", to: "devise/sessions#destroy"
+    resources :users
+  end
   resources :passwords
   resources :posts  do
     resources :comments, only: %i(create)

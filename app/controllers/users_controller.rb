@@ -1,5 +1,5 @@
-class UsersController < ApplicationController
-  before_action :authenticate_user, only: %i(index show)
+class UsersController < Devise::SessionsController
+  before_action :authenticate_user!, only: %i(index show)
   before_action :find_user, only: %i(show edit)
   
   def new

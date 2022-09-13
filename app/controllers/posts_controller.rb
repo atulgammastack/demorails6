@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   before_action :find_post, only: %i(edit show update)
-  before_action :authenticate_user, only: %i( new index show)
-
+  before_action :authenticate_user!
+  
   def new
     @post = Post.new
   end
