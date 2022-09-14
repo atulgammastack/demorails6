@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   before_action :find_post, only: %i(edit show update)
   before_action :authenticate_user!
-  
+
   def new
     @post = Post.new
   end
@@ -34,14 +34,14 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post = current_user.posts.find_by(id: params[:id]) 
+    @post = current_user.posts.find_by(id: params[:id])
     @post.destroy
     flash[:success] = "You delted a post"
     redirect_to posts_path
   end
 
   private
-  
+
   def post_params
     params.permit(:content, :post_file)
   end
