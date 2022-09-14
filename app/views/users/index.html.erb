@@ -9,8 +9,9 @@
         <% end %>
         Name: <%= user.username %>
         <span class="profile-link">
-          <%= link_to 'See Profile',  user_path(user), class: 'profile-link' %>
+          <%= link_to 'See Profile',  user_path(user), class: 'profile-link' %> 
         </span>
+        <%= render 'friendship_realation', object: user %>
       </li><br>
     <% end %>
   </ul>

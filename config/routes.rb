@@ -6,7 +6,9 @@ Rails.application.routes.draw do
     get 'login', to: 'devise/sessions#new'
     post 'login', to: 'devise/session#create'
     get 'logout', to: 'devise/sessions#destroy'
-    resources :users
+    resources :users do
+      resources :friendships, only: %i(create update destroy)
+    end
   end
   resources :passwords
   resources :posts  do
