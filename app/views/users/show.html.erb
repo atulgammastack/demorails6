@@ -79,6 +79,9 @@
         </table>
         </div>
         <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+          <% if @user == current_user %>
+            <%= link_to "Edit profile ", edit_user_registration_path(@user), class: "btn btn-primary btn-lg" %>
+          <% end %>
           <%= render 'friendship_realation', object: @user %>
         </div>
       </div>
