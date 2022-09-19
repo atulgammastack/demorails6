@@ -5,6 +5,9 @@ ruby '2.6.0'
 
 gem 'devise'
 
+gem 'rails-controller-testing'
+
+gem 'jquery-rails'
 gem "figaro"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.0.5', '>= 6.0.5.1'

@@ -14,6 +14,10 @@ class User < ApplicationRecord
   validates :first_name, :email, :username, presence: true
   validates :email, uniqueness: true
   validates :password, confirmation: { case_sensitive: true }
+  
+  def like_post(post)
+    likes.find_by(post_id: post.id)
+  end
 
   def is_friend?(user)
     friendship_for(user)&.confirmed

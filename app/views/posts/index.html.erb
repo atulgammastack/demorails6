@@ -1,11 +1,22 @@
 <div class="container-fluid">
   <div class="container">
     <div  class="post-form-wrapper">
-      <h2>Add new post </h2>
-      <%= render "form", post: @post %>
+      <%= link_to 'Create new post', new_post_path, class: "btn btn-primary btn-lg mb-4", data: { bs_toggle: 'modal', bs_target: '#newpostModal', remote: true } %>
     </div>
     <div class="posts mt-5">
-     <%= render "shared/posts" %>   
+      <%= render "shared/posts" %>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="newpostModal" tabindex="-1" aria-labelledby="newpostModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="newpostModalLabel">Create new post</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div id= "newpostform">
+      </div>
     </div>
   </div>
 </div>
