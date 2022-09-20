@@ -7,7 +7,8 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all.recent
+    ids = current_user.friendships.where(confirmed: true).pluck(:user_id, :friend_id)
+    @posts = Post.where(user_id: ids.flatten.uniq).recent
   end
 
   def show; end
@@ -47,6 +48,8 @@ class PostsController < ApplicationController
   end
 
   def find_post
+    ids = current_user.friendships.pluck(:id) << current_user.id
+    posts = Post.where(user_id: ids)
     @post = Post.find_by(id: params[:id])
     unless @post.present?
       flash[:notice] = "post not found"

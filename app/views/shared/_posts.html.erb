@@ -9,9 +9,9 @@
         <a href="<%= post_path(post) %>" ><%= post.content %></a><br>
         <% if post.post_file.attached? %>
           <% if post.post_file.content_type.include?("image")%>
-            <%= image_tag url_for( post.post_file) %>
+            <%= image_tag url_for( post.post_file) %><br>
           <% else %>
-            <span class= "video_section"><%= video_tag  url_for(post.post_file) %></span>
+            <span class= "video_section"><%= video_tag  url_for(post.post_file) %></span><br>
           <% end %>
         <% end %>
         <% if like = current_user.like_post(post) %>
@@ -19,7 +19,9 @@
         <% else %>
           <%= link_to 'Like!', post_likes_path( post), method: :post,  id: "like-btn-#{post.id}", class: "btn btn-primary btn-lg", remote: :true %>
         <% end %>  
-        <p>likes: <%= post.likes.count %>  comments: <%= post.comments.count %></p>
+        <p id= "post-like-counter-<%=post.id%>" >
+          likes: <%= @total_likes %>  comments: <%= post.comments.count %>
+        </p>
         <% post.comments.each do |comment| %>
           <div class="post-comments">
             <b><%= link_to comment.user.username ,user_path(comment.user, class: 'comment-author') %>:</b>

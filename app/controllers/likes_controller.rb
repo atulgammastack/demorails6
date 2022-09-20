@@ -1,6 +1,6 @@
 class LikesController < ApplicationController
   before_action :find_like
-  
+
   def create
     @like = @post.likes.new(user_id: current_user.id)
     respond_to do |format|
@@ -26,11 +26,11 @@ class LikesController < ApplicationController
       @total_likes = @post.likes.count
     end
   end
-  
+
   private
 
   def find_like
     @post = Post.find_by(id: params[:post_id])
-    @like = @post.like_by_user(current_user.id) 
+    @like = @post.like_by_user(current_user.id)
   end
 end
