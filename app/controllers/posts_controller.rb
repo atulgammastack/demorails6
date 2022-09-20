@@ -48,8 +48,6 @@ class PostsController < ApplicationController
   end
 
   def find_post
-    ids = current_user.friendships.pluck(:id) << current_user.id
-    posts = Post.where(user_id: ids)
     @post = Post.find_by(id: params[:id])
     unless @post.present?
       flash[:notice] = "post not found"
