@@ -15,12 +15,12 @@
           <% end %>
         <% end %>
         <% if like = current_user.like_post(post) %>
-          <%= link_to 'Dislike!', post_like_path(post, like), method: :delete, id: "dislike-btn-#{post.id}", class: "btn btn-primary btn-lg", remote: :true %>
+          <%= link_to 'Dislike', post_like_path(post, like), method: :delete, id: "dislike-btn-#{post.id}", class: "btn btn-primary btn-lg", remote: :true %>
         <% else %>
-          <%= link_to 'Like!', post_likes_path( post), method: :post,  id: "like-btn-#{post.id}", class: "btn btn-primary btn-lg", remote: :true %>
+          <%= link_to 'Like', post_likes_path( post), method: :post,  id: "like-btn-#{post.id}", class: "btn btn-primary btn-lg", remote: :true %>
         <% end %>  
         <p id= "post-like-counter-<%=post.id%>" >
-          likes: <%= @total_likes %>  comments: <%= post.comments.count %>
+          likes: <%= post.likes.count %>  comments: <%= post.comments.count %>
         </p>
         <% post.comments.each do |comment| %>
           <div class="post-comments">
