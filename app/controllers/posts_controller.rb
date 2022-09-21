@@ -7,6 +7,7 @@ class PostsController < ApplicationController
   end
 
   def index
+    byebug
     @posts = Post.all.recent
   end
 
