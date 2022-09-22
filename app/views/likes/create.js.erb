@@ -1,0 +1,6 @@
+$('#like-btn-<%= @post.id %>').html('')
+$('#like-btn-<%= @post.id %>').attr('href', '/posts/<%= @post.id %>/likes/<%= @like.id %>')
+$('#like-btn-<%= @post.id %>').attr('data-method', 'delete')
+$("#like-btn-<%= @post.id %>").attr('class', "fa fa-thumbs-down")
+$('#like-btn-<%= @post.id %>').attr('id', 'dislike-btn-<%= @post.id %>')
+$('#post-like-counter-<%= @post.id %>').text( ' likes: <%= @total_likes %>  comments: <%= @post.comments.count %> ')
