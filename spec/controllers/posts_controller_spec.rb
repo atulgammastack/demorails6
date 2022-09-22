@@ -24,4 +24,5 @@ RSpec.describe PostsController, type: :controller do
       subject
       expect(assigns(:posts)).to eq([ post1, post])
     end
+  end
 end
