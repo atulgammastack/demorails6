@@ -26,5 +26,4 @@ class User < ApplicationRecord
   def friend_request_for(user)
     friendships.find_by(friend_id: user.id)
   end
-
 end
