@@ -4,13 +4,12 @@ class LikesController < ApplicationController
   def create
     @like = @post.likes.new(user_id: current_user.id)
     respond_to do |format|
-      if @like.save
-       format.js
-      else
+      unless @like.save
         flash[:alert] = "You cannot like this post."
         redirect_back
       end
       @total_likes = @post.likes.count
+      format.js
     end
   end
 
@@ -18,12 +17,12 @@ class LikesController < ApplicationController
     respond_to do |format|
       if @like
         @like.destroy
-        format.js
       else
         flash[:alert] = "You cannot dislike post that you did not like before."
         redirect_back
       end
       @total_likes = @post.likes.count
+      format.js
     end
   end
 
