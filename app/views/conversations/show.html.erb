@@ -1,0 +1,21 @@
+<div class="chatboxhead">
+  <div class="chatboxtitle">
+    <i class="fa fa-comments"></i>
+    <h1><%= @reciever.username %> </h1>
+  </div>
+</div>
+<div class="chatboxcontent">
+  <% if @messages.any? %>
+    <% @messages.each do |msg| %>
+      <%=  msg.user.username + " " + msg.content %><br>
+    <% end %>
+  <% end %>
+</div>
+<div id="msg">
+</div>
+ <div class="chatboxinput">
+  <%= form_for([@conversation, @message], :remote => true, :html => { id: "conversation_form_#{@conversation.id}"}) do |f| %>
+    <%= f.text_area :content, class: "chatboxtextarea", "data-cid" => @conversation.id %>
+    <%= f.submit %>
+  <% end %>
+</div>  

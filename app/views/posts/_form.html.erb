@@ -1,5 +1,10 @@
-<%= form_with  model: @post, local: true do |form| %>
-  <%= form.text_area :content, id: :post_content, class: 'form-control', placeholder: "what's on your mind?" %>
-  <%= form.file_field :post_file %><br>
-  <%= form.submit 'Save', class: 'btn btn-primary' %>
+<%= form_with  model: @post, local: false do |form| %>
+  <div class="modal-body">
+    <%= form.text_area :content, id: :post_content, class: 'form-control', placeholder: "what's on your mind?" %>
+    <%= form.file_field :post_file %><br>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+    <%= form.submit 'Save', class: 'btn btn-primary' %>
+  </div>
 <% end %>

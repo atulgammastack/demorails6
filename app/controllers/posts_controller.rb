@@ -7,7 +7,8 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all.recent
+    ids = current_user.friendships.where(confirmed: true).pluck(:user_id, :friend_id)
+    @posts = Post.where(user_id: ids.flatten.uniq).recent
   end
 
   def show; end
@@ -43,7 +44,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.permit(:content, :post_file)
+    params.require(:post).permit(:content, :post_file)
   end
 
   def find_post

@@ -9,9 +9,10 @@
         <% end %>
         Name: <%= user.username %>
         <span class="profile-link">
-          <%= link_to 'See Profile',  user_path(user), class: 'profile-link' %> 
+          <%= link_to 'See Profile',  user_path(user), class: 'profile-link' %><br>
         </span>
         <%= render 'friendship_realation', object: user %>
+        <%= link_to "Send Message", "javascript:void(0)", class: "btn btn-success btn-xs start-conversation", "data-sid" => current_user.id, "data-rip" => user.id %>
       </li><br>
     <% end %>
   </ul>
