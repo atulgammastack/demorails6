@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'chats', to: 'chatting#index'
   devise_for :users
   devise_scope :user do
     root "devise/sessions#new"
@@ -14,5 +15,8 @@ Rails.application.routes.draw do
   resources :posts  do
     resources :comments, only: %i(create)
     resources :likes, only: %i(create destroy)
+  end
+  resources :conversations do
+    resources :messages
   end
 end

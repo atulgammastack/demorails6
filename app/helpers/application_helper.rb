@@ -19,4 +19,8 @@ module ApplicationHelper
     when  'alert' then 'alert- info'
     end
   end
+
+  def conversation_participant(conversation)
+    conversation.recipient == current_user ? conversation.sender : conversation.recipient
+  end
 end

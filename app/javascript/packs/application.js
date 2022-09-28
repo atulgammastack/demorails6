@@ -5,3 +5,4 @@ require("channels")
 import jquery from 'jquery';
 window.$ = window.jQuery = jquery;
 import 'bootstrap';
+require("packs/user")

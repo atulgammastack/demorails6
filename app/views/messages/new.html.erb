@@ -1,0 +1,6 @@
+<div id="msg">
+</div>
+<%= form_for @message, url: conversation_messages_path , method: :POST,  remote: true do |f| %>
+  <%= f.text_field :content %>
+  <%= f.submit %>
+<% end %>

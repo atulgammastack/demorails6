@@ -7,7 +7,8 @@ class User < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :friendships, ->(user) { unscope(:where).where(user: user).or(where(friend: user)) }
   has_one_attached :profile_picture
-
+  has_many :messages, dependent: :destroy
+  
   validates :first_name, length: { minimum: 3 }
   validates :first_name, :email, :username, presence: true
   validates :email, uniqueness: true
